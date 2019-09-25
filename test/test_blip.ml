@@ -1,10 +1,12 @@
 open OUnit2
 open Printf
 
+module Rng = Nocrypto.Rng
+
 let fmt = Format.std_formatter
 
-let test_blip1 _ctx =
-  printf "\nTest 1\n\n";
+let test1 ?g name =
+  printf "\n%s\n\n" name;
 
   let n = 10 in
   let e = 13. in
@@ -15,6 +17,7 @@ let test_blip1 _ctx =
   let k = Bloomf.k a in
   let m = Bloomf.m a in
   let p = Blip.p e k in
+  let flip = Blip.flip ?g in
 
   Bloomf.add a "abc";
   Bloomf.add b "abc";
@@ -26,10 +29,10 @@ let test_blip1 _ctx =
   let bb = Bloomf.bits b in
   let cb = Bloomf.bits c in
   let db = Bloomf.bits d in
-  let ab' = Blip.flip ab p in
-  let bb' = Blip.flip bb p in
-  let cb' = Blip.flip cb p in
-  let db' = Blip.flip db p in
+  let ab' = flip ab p in
+  let bb' = flip bb p in
+  let cb' = flip cb p in
+  let db' = flip db p in
 
   printf "m = %d\n" m;
   printf "e = %.2f\n" e;
@@ -58,6 +61,14 @@ let test_blip1 _ctx =
   printf "sim ab db' = %.2f\n" @@ Blip.sim ab db';
   printf "sim cb db' = %.2f\n" @@ Blip.sim cb db';
   printf "\n"
+
+let test_blip1 _ctx =
+  test1 "Test 1"
+
+let test_blip1s _ctx =
+  let seed = Cstruct.create 10_000 in
+  let g = Rng.create ~seed (module Rng.Generators.Null) in
+  test1 ~g "Test 1 with seed"
 
 let test_blip2 _ctx =
   printf "\nTest 2\n\n";
@@ -150,8 +161,9 @@ let test_blip2 _ctx =
 let suite =
   "suite">:::
     [
-      "blip1">:: test_blip1;
-      "blip2">:: test_blip2;
+      "blip 1">:: test_blip1;
+      "blip 1 seeded">:: test_blip1s;
+      "blip 2">:: test_blip2;
     ]
 
 let () =

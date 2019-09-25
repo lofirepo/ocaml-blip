@@ -10,9 +10,9 @@
  *)
 val p : float -> int -> float
 
-(** [flip bits p] flips each element of [bits]
-    independently with probability [p] *)
-val flip : Bitv.t -> float -> Bitv.t
+(** [flip ?g bits p] flips each element of [bits]
+    independently with probability [p], using RNG [g] if provided *)
+val flip : ?g:Nocrypto.Rng.g -> Bitv.t -> float -> Bitv.t
 
 (** [sim a b] returns the cosine similarity measure
     of two bit vectors representing (flipped) Bloom filters *)
