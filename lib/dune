@@ -1,0 +1,6 @@
+(library
+ (name blip)
+ (public_name blip)
+ (modules blip)
+ (libraries bitv nocrypto)
+)

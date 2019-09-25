@@ -1,0 +1,38 @@
+[![Build Status](https://travis-ci.org/p2pcollab/ocaml-blip.svg?branch=master)](https://travis-ci.org/p2pcollab/ocaml-blip)
+
+# BLIP
+
+BLIP is an OCaml implementation of the BLoom-then-FLip algorithm as described in the paper [BLIP: Non-interactive Differentially-Private Similarity Computation on Bloom filters](http://www.academia.edu/download/32383514/Blip-LNCS-Proof.pdf)
+
+BLIP is distributed under the MPL-2.0 license.
+
+## Installation
+
+``blip`` can be installed via `opam`:
+
+    opam install blip
+
+## Building
+
+To build from source, generate documentation, and run tests, use `dune`:
+
+    dune build
+    dune build @doc
+    dune runtest -f -j1 --no-buffer
+
+In addition, the following `Makefile` targets are available
+ as a shorthand for the above:
+
+    make all
+    make build
+    make doc
+    make test
+
+## Documentation
+
+The documentation and API reference is generated from the source interfaces.
+It can be consulted [online][doc] or via `odig`:
+
+    odig doc blip
+
+[doc]: https://p2pcollab.net/doc/blip/

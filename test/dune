@@ -1,0 +1,4 @@
+(test
+ (name test_blip)
+ (package blip)
+ (libraries oUnit nocrypto.unix blip bitv bloomf))
