@@ -14,8 +14,7 @@ let test1 ?g name =
   let b = Bloomf.create n in
   let c = Bloomf.create n in
   let d = Bloomf.create n in
-  let k = Bloomf.k a in
-  let m = Bloomf.m a in
+  let m, k = Bloomf.params a in
   let p = Blip.p e k in
   let flip = Blip.flip ?g in
 
@@ -79,8 +78,7 @@ let test_blip2 _ctx =
   let b = Bloomf.create n in
   let c = Bloomf.create n in
   let d = Bloomf.create n in
-  let k = Bloomf.k a in
-  let m = Bloomf.m a in
+  let m, k = Bloomf.params a in
   let p = Blip.p e k in
 
   let rec add bf i n =
@@ -138,23 +136,19 @@ let test_blip2 _ctx =
     else acc
   in
 
-  let af = Bloomf.create n in
-  Bloomf.set_bits af ab';
+  let af = Bloomf.create ~bits:ab' n in
   let ar = (float_of_int (mem af 0 100)) /. 100. in
   printf "recall ab' = %.2f\n" ar;
 
-  let bf = Bloomf.create n in
-  Bloomf.set_bits bf bb';
+  let bf = Bloomf.create ~bits:bb' n in
   let br = (float_of_int (mem bf 10 110)) /. 100. in
   printf "recall bb' = %.2f\n" br;
 
-  let cf = Bloomf.create n in
-  Bloomf.set_bits cf cb';
+  let cf = Bloomf.create ~bits:cb' n in
   let cr = (float_of_int (mem cf 50 150)) /. 100. in
   printf "recall cb' = %.2f\n" cr;
 
-  let df = Bloomf.create n in
-  Bloomf.set_bits df db';
+  let df = Bloomf.create ~bits:db' n in
   let dr = (float_of_int (mem df 100 200)) /. 100. in
   printf "recall db' = %.2f\n" dr
 
