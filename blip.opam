@@ -4,9 +4,9 @@ synopsis: "BLIP: Bloom-then-Flip"
 maintainer: "TG x Thoth <*@tg-x.net>"
 authors: ["TG x Thoth <*@tg-x.net>"]
 tags: [ "bloom" "filter" "flip" "" ]
-license: "MPL-2.0"
+license: "AGPL-3.0"
 homepage: "https://github.com/p2pcollab/ocaml-blip"
-doc: "https://p2pcollab.github.io/doc/blip"
+doc: "https://p2pcollab.net/doc/ocaml/blip/"
 dev-repo: "git+https://github.com/p2pcollab/ocaml-blip.git"
 bug-reports: "https://github.com/p2pcollab/ocaml-blip/issues"
 depends:
