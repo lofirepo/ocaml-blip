@@ -2,7 +2,7 @@
 
 # BLIP
 
-BLIP is an OCaml implementation of the BLoom-then-flIP algorithm as described in the paper [BLIP: Non-interactive Differentially-Private Similarity Computation on Bloom filters](http://www.academia.edu/download/32383514/Blip-LNCS-Proof.pdf)
+BLIP is an OCaml implementation of the BLoom-then-flIP algorithm as described in the paper [BLIP: Non-interactive Differentially-Private Similarity Computation on Bloom filters](https://scholar.google.com/scholar?cluster=16665581281970888&hl=en)
 
 BLIP is distributed under the AGPL-3.0-only license.
 

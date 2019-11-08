@@ -17,8 +17,8 @@
 (**
 {1 BLIP: BLoom-then-flIP}
 
-This is an implementation of the BLoom-then-flIP algorithm as described in the paper {{:http://www.academia.edu/download/32383514/Blip-LNCS-Proof.pdf} BLIP: Non-interactive Differentially-Private Similarity Computation on Bloom filters}
- *)
+This is an implementation of the BLoom-then-flIP algorithm as described in the paper {{:https://scholar.google.com/scholar?cluster=16665581281970888&hl=en} BLIP: Non-interactive Differentially-Private Similarity Computation on Bloom filters}
+*)
 
 (** [p e k] returns the optimal flipping probability of a Bloom filter.
 
