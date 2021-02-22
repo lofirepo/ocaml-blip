@@ -51,6 +51,9 @@
           self.packages.x86_64-linux.ocaml-bloomf
           self.packages.x86_64-linux.ocaml-bitv
           nocrypto
+        ];
+        nativeBuildInputs = with pkgs.ocamlPackages; [
+          odoc
           ounit
         ];
       };
