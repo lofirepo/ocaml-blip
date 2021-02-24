@@ -28,72 +28,70 @@
           with final;
           let mkOcamlPackages = prevOcamlPackages:
                 with prevOcamlPackages;
-                let ocamlPackages =
-                      {
-                        inherit ocaml;
-                        inherit findlib;
-                        inherit ocamlbuild;
-                        inherit opam-file-format;
-                        inherit buildDunePackage;
+                let ocamlPackages = {
+                      inherit ocaml;
+                      inherit findlib;
+                      inherit ocamlbuild;
+                      inherit opam-file-format;
+                      inherit buildDunePackage;
 
-                        bitv =
-                          buildDunePackage rec {
-                            pname = "bitv";
-                            version = "1.4";
-                            src = fetchFromGitHub {
-                              owner = "backtracking";
-                              repo = pname;
-                              rev = version;
-                              sha256 = "0mhnbwnw06s6kknxygm0fa51gb1wd6y8npfq6r5dvlmmpgf7xgm8";
-                            };
-
-                            useDune2 = true;
+                      bitv =
+                        buildDunePackage rec {
+                          pname = "bitv";
+                          version = "1.4";
+                          src = fetchFromGitHub {
+                            owner = "backtracking";
+                            repo = pname;
+                            rev = version;
+                            sha256 = "0mhnbwnw06s6kknxygm0fa51gb1wd6y8npfq6r5dvlmmpgf7xgm8";
                           };
 
-                        bloomf =
-                          buildDunePackage rec {
-                            pname = "bloomf";
-                            version = "0.1.0-bits";
-                            src = fetchFromGitHub {
-                              owner = "p2pcollab";
-                              repo = pname;
-                              rev = "cbffe83255cb12f5117825f8f8ebf363e18bd627";
-                              sha256 = "0p4l8fib72vmbyk5izlsfawyxfz3wgcg2c2vglqf5103y28xi1jg";
-                            };
+                          useDune2 = true;
+                        };
 
-                            useDune2 = true;
-
-                            buildInputs = with ocamlPackages; [
-                              bitv
-                            ];
+                      bloomf =
+                        buildDunePackage rec {
+                          pname = "bloomf";
+                          version = "0.1.0-bits";
+                          src = fetchFromGitHub {
+                            owner = "p2pcollab";
+                            repo = pname;
+                            rev = "cbffe83255cb12f5117825f8f8ebf363e18bd627";
+                            sha256 = "0p4l8fib72vmbyk5izlsfawyxfz3wgcg2c2vglqf5103y28xi1jg";
                           };
 
-                        blip =
-                          buildDunePackage rec {
-                            pname = "blip";
-                            version = "0.0.1";
-                            src = self;
+                          useDune2 = true;
 
-                            useDune2 = true;
-                            doCheck = true;
+                          buildInputs = with ocamlPackages; [
+                            bitv
+                          ];
+                        };
 
-                            nativeBuildInputs = with ocamlPackages; [
-                              odoc
-                              ounit
-                            ];
-                            buildInputs = with ocamlPackages; [
-                              bloomf
-                              bitv
-                              nocrypto
-                            ];
-                          };
-                      };
+                      blip =
+                        buildDunePackage rec {
+                          pname = "blip";
+                          version = "0.0.1";
+                          src = self;
+
+                          useDune2 = true;
+                          doCheck = true;
+
+                          nativeBuildInputs = with ocamlPackages; [
+                            odoc
+                            ounit
+                          ];
+                          buildInputs = with ocamlPackages; [
+                            bloomf
+                            bitv
+                            nocrypto
+                          ];
+                        };
+                    };
                 in ocamlPackages;
           in
             let allOcamlPackages =
                   forAllOcamlPackages (ocamlPackages:
-                    mkOcamlPackages ocaml-ng.${ocamlPackages}
-                  );
+                    mkOcamlPackages ocaml-ng.${ocamlPackages});
             in
               allOcamlPackages // {
                 ocamlPackages = allOcamlPackages.${defaultOcamlPackages};
@@ -102,12 +100,10 @@
         packages =
           forAllSystems (system:
             forAllOcamlPackages (ocamlPackages:
-              nixpkgsFor.${system}.${ocamlPackages}
-            ));
+              nixpkgsFor.${system}.${ocamlPackages}));
 
         defaultPackage =
           forAllSystems (system:
-            nixpkgsFor.${system}.ocamlPackages.blip
-          );
+            nixpkgsFor.${system}.ocamlPackages.blip);
       };
 }
