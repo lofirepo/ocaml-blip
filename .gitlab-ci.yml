@@ -5,19 +5,17 @@ default:
   cache:
     paths:
       - .nix
-      - .nix-profile
   before_script:
     - test -d .nix || cp -a /nix .nix
     - mount --bind .nix /nix
     - mkdir -p /etc/nix
-    - nix-env -iA nixpkgs.git nixpkgs.nixFlakes
     - echo 'experimental-features = nix-command flakes' > /etc/nix/nix.conf
+    - nix-env -iA nixpkgs.nixFlakes nixpkgs.git
 
 build:
   stage: build
   script:
-    - nix build --debug --show-trace
-    - nix build '.#ocamlPackages_4_10.blip' --debug --show-trace
-    - nix build '.#ocamlPackages_4_11.blip' --debug --show-trace
-    - nix build '.#ocamlPackages_4_12.blip' --debug --show-trace
-    - nix flake check --debug --show-trace
+    - nix build
+    - nix build '.#ocamlPackages_4_10.blip'
+    - nix build '.#ocamlPackages_4_11.blip'
+    #- nix build '.#ocamlPackages_4_12.blip'
