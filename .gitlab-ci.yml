@@ -19,3 +19,4 @@ build:
     - nix build '.#ocamlPackages_4_10.blip'
     - nix build '.#ocamlPackages_4_11.blip'
     #- nix build '.#ocamlPackages_4_12.blip'
+    - nix-collect-garbage -d
